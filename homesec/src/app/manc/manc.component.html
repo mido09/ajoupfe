@@ -1,0 +1,18 @@
+<div class="rounded border border-primary">
+    <div class="d-flex justify-content-center border-bottom border-primary">
+        <h3>Manual Controls</h3>
+    </div>
+    <br>
+<div class="d-flex justify-content-center">
+    <div>
+        <button (click)="changeState()" *ngIf="this.state" type="button" class="btn btn-success d-flex justify-content-center">Turn ON</button><br>
+    </div>
+    <div>
+        <button (click)="changeState()" *ngIf="!this.state" type="button" class="btn btn-danger d-flex justify-content-center">Turn OFF</button><br>
+    </div>
+
+    <div>
+        <button (click)="reset()" type="button" class="btn btn-secondary d-flex justify-content-center">Reset</button><br>
+    </div>
+</div>
+</div>

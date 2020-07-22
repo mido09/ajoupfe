@@ -1,0 +1,78 @@
+<div class="rounded border border-primary">
+    <div class="d-flex justify-content-center border-bottom border-primary">
+        <h3>Live Status</h3>
+    </div>
+    <br>
+
+    <div class="d-flex justify-content-center">
+        <div>
+            <h5>Sensor Live Status</h5>
+        </div>
+    </div>
+    <div class="container glo">
+        <div class="row">
+          <div class="col-sm">
+            <b>Connected</b>
+            <br>
+            <i>{{ connected }}</i>
+          </div>
+          <div class="col-sm">
+            <b>State</b><br>
+            <i>{{ state }}</i>
+          </div>
+          <div class="col-sm">
+            <b>Alerting</b>
+            <br>
+            <i>{{ alerting }}</i>
+          </div>
+          
+        </div>
+      </div>
+      <hr>
+
+      <div class="d-flex justify-content-center">
+        <div>
+            <h5>Home Current Configuration</h5>
+        </div>
+    </div>
+    <div class="container glo">
+        <div class="row">
+          <div class="col-sm d-flex justify-content-center">
+            <b>Longitude: </b><br>
+            <i>{{ longitude }}</i>
+          </div>
+          <div class="col-sm d-flex justify-content-center">
+            <b>Latitude: </b>
+            <br>
+            <i>{{ latitude }}</i>
+          </div>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="d-flex justify-content-center">
+        <div>
+            <h5>Mobile Configuration</h5>
+        </div>
+    </div>
+    <div class="container glo">
+        <div class="row">
+          <div class="col-sm">
+            <b>Connected</b><br>
+            <i>{{ userconnected }}</i>
+          </div>
+          <div class="col-sm">
+            <b>Latitude</b>
+            <br>
+            <i>{{ userlatitude }}</i>
+          </div>
+          <div class="col-sm">
+            <b>Longitude</b>
+            <br>
+            <i>{{ userlongitude }}</i>
+          </div>
+        </div>
+      </div>
+
+</div>
