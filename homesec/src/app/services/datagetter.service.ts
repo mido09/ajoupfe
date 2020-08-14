@@ -10,17 +10,17 @@ export class DatagetterService {
   constructor(private httpc: HttpClient) { }
 
   sendResetRequest() : Observable<any>{
-    return this.httpc.get("http://localhost:1300/reset");
+    return this.httpc.get("http://193.46.198.9:1300/reset");
   }
 
 
   turnOn(){
-    return this.httpc.get("http://localhost:1300/setOn");
+    return this.httpc.get("http://193.46.198.9:1300/setOn");
   }
 
 
   turnOff(){
-    return this.httpc.get("http://localhost:1300/setOff");
+    return this.httpc.get("http://193.46.198.9:1300/setOff");
   }
 
 }

@@ -12,7 +12,7 @@ export class SocketsrvService {
   constructor() { }
 
   connectSocket(){
-    this.socket = io("http://localhost:1300");
+    this.socket = io("http://193.46.198.9:1300");
   }
 
   // HANDLER
