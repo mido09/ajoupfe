@@ -35,6 +35,7 @@ res.end("OK");
 app.get("/setOff",(req,res)=>{
 console.log("Got request on /setOff");
 //port.write('0');
+io.emit("setOff",0);
 var rss = {"message":"SetOFF Ok"};
 sensorStatus.state = "OFF";
 sensorStatus.alerting = "FALSE";
@@ -52,6 +53,7 @@ res.end(JSON.stringify(sensorStatus));
 app.get("/setOn",(req,res)=>{
 console.log("Got request on /setOn");
 //port.write('1');
+io.emit('setOn',1);
 sensorStatus.state = "ON";
 io.emit("state","ON");
 var rss = {"message":"SetON Ok"};
@@ -61,6 +63,7 @@ res.end(JSON.stringify(sensorStatus));
 app.get("/reset",(req,res)=>{
 console.log("Got request on /reset");
 //port.write('r');
+io.emit('reset',0);
 var rss = {"message":"Reset Ok"};
 sensorStatus.alerting = "FALSE";
 io.emit("alerting","FALSE");
@@ -90,6 +93,16 @@ res.end(JSON.stringify(homeconfig));
 
 io.on('connection', (socket) => { 
 console.log("socket connected ...");
+socket.on("cardState",function(data){
+ console.log("received card state:"+JSON.stringify(data));
+ sensorStatus.state = data.state;  
+});
+socket.on("alerting",function(data){
+ console.log("received alerting event ...");
+ sensorStatus.alerting = "TRUE";
+ io.emit("alerting","TRUE");
+
+});
 
 });
 
