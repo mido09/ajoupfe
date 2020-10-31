@@ -35,6 +35,7 @@ res.end("OK");
 app.get("/setOff",(req,res)=>{
 console.log("Got request on /setOff");
 //port.write('0');
+io.emit("setOff",0);
 var rss = {"message":"SetOFF Ok"};
 sensorStatus.state = "OFF";
 sensorStatus.alerting = "FALSE";
