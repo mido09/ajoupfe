@@ -1,12 +1,16 @@
-FROM node:alpine AS builder
+FROM node:12.16.1-alpine As builder
 
-WORKDIR /app
+WORKDIR /usr/src/app
+
+COPY package.json package-lock.json ./
+
+RUN npm install
 
 COPY . .
 
-RUN npm install && \
-    npm run build
+RUN npm run build --prod
 
-FROM nginx:alpine
+FROM nginx:1.15.8-alpine
 
-COPY --from=builder /app/dist/* /usr/share/nginx/html/
+COPY --from=builder /usr/src/app/dist/homesec/ /usr/share/nginx/html
+
