@@ -93,7 +93,7 @@ res.end(JSON.stringify(homeconfig));
 
 io.on('connection', (socket) => { 
 console.log("socket connected ...");
-conole.log("public ip ->"+socket.handshake.address);
+console.log("public ip ->"+socket.handshake.address);
 socket.on("cardState",function(data){
  console.log("received card state:"+JSON.stringify(data));
  sensorStatus.state = data.state;  
