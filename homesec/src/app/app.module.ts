@@ -11,7 +11,9 @@ import { ServerstateService } from './services/serverstate.service';
 import { SocketsrvService } from './services/socketsrv.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
-import { StrComponent } from './str/str.component'
+import { StrComponent } from './str/str.component';
+import { AuthComponent } from './auth/auth.component'
+import { AuthserService } from './authser.service';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,8 @@ import { StrComponent } from './str/str.component'
     MancComponent,
     LivestatusComponent,
     ConfigComponent,
-    StrComponent
+    StrComponent,
+    AuthComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +30,7 @@ import { StrComponent } from './str/str.component'
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [DatagetterService, ServerstateService, SocketsrvService],
+  providers: [DatagetterService, ServerstateService, SocketsrvService, AuthserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

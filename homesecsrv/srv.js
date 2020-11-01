@@ -14,6 +14,7 @@ const io = require('socket.io')(httpServer);
 var homeconfig = {"latitude":0, "longitude":0};
 var sensorStatus = {"connected":"TRUE", "state":"ON", "alerting":"FALSE"};
 var mobileconfig = {"connected":"FALSE", "latitude":43.627770, "longitude":7.048154};
+var isAuth = false;
 
 
 httpServer.listen(1300, ()=>{
@@ -80,7 +81,6 @@ console.log("Got request on /getMobileConfig");
 res.end(JSON.stringify(mobileconfig));
 });
 
-
 app.get("/setHomeConfig",(req,res)=>{
 var lat = req.query.lat;
 var lon = req.query.lon;
@@ -90,6 +90,31 @@ homeconfig.longitude = lon;
 io.emit("homeconfig",homeconfig);
 res.end(JSON.stringify(homeconfig));
 });
+
+
+//Authentication handler
+
+app.get("/getAuthStatus",(req,res)=>{
+console.log("Got request on /getAuthStatus");
+var qrs = {"isAuth":isAuth};
+res.end(JSON.stringify(qrs));
+});
+
+app.post("/disconnect",(req,res)=>{
+console.log("Got post request on /disconnect");
+isAuth = false;
+io.emit("auth",isAuth);
+res.end(JSON.stringify(isAuth));
+});
+
+app.post("/login",(req,res)=>{
+console.log("Got post request on /login");
+isAuth = true;
+io.emit("auth",isAuth);
+res.end(JSON.stringify(isAuth));
+});
+
+//Socket handler
 
 io.on('connection', (socket) => { 
 console.log("socket connected ...");

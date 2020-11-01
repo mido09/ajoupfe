@@ -4,7 +4,7 @@
   </h1>
 </nav>
 
-<div class="container glo">
+<div class="container glo" *ngIf="this.authentified">
   <div class="row">
     <div class="col-sm">
       <manc></manc>
@@ -19,6 +19,13 @@
   <div class="row justify-content-around">
     <div class="col sm-8">
       <str></str>
+    </div>
+  </div>
+</div>
+<div class="container glo">
+  <div class="row justify-content-around">
+    <div class="col sm-8">
+      <auth></auth>
     </div>
   </div>
 </div>

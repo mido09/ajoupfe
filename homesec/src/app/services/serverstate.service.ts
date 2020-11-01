@@ -20,6 +20,10 @@ export class ServerstateService {
   getMobileConfig()  : Observable<any>{
     return this.httpc.get("http://193.46.198.9:1300/getMobileConfig");
   }
+
+  getAuthStatus(){
+    return this.httpc.get("http://193.46.198.9:1300/getAuthStatus");
+  }
   
   setHomePosition(position) : Observable<any>{
     var url = "http://193.46.198.9:1300/setHomeConfig?lat="+position.latitude+
