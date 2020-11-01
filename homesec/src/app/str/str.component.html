@@ -1,0 +1,15 @@
+<div class="rounded border border-primary">
+    <div class="d-flex justify-content-center border-bottom border-primary">
+        <h3>Live Streaming</h3>
+    </div>
+    <br>
+<div class="container" >
+    <div class="row justify-content-around">
+        <button (click)="changeShown()" type="button" class="btn btn-success">{{this.msg}}</button>
+    </div>
+    <br>
+    <div *ngIf="this.isShown"  class="row row justify-content-around">
+       <img src="{{this.strUrl}}" width="554" height="416"/>
+    </div>
+</div>
+</div>

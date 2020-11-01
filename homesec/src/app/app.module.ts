@@ -10,14 +10,16 @@ import { DatagetterService } from './services/datagetter.service';
 import { ServerstateService } from './services/serverstate.service';
 import { SocketsrvService } from './services/socketsrv.service';
 import { HttpClientModule } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms'
+import { ReactiveFormsModule } from '@angular/forms';
+import { StrComponent } from './str/str.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     MancComponent,
     LivestatusComponent,
-    ConfigComponent
+    ConfigComponent,
+    StrComponent
   ],
   imports: [
     BrowserModule,
