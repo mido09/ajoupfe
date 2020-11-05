@@ -11,7 +11,7 @@ export class AuthComponent implements OnInit {
 
   checkoutForm;
 
-  constructor(private ss : AuthserService, private formBuilder: FormBuilder) {
+  constructor(private autsrv : AuthserService, private formBuilder: FormBuilder) {
     this.checkoutForm = this.formBuilder.group({
       username: '',
       password: ''
@@ -23,13 +23,13 @@ export class AuthComponent implements OnInit {
 
   auth(){
     let body = {};
-    this.ss.login(body).subscribe((data)=>{
+    this.autsrv.login(body).subscribe((data)=>{
 
     });
   }
   disconnect(){
     let body = {};
-    this.ss.disconnect().subscribe((data)=>{
+    this.autsrv.disconnect().subscribe((data)=>{
       
     });
   }

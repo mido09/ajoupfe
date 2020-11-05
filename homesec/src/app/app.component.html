@@ -2,6 +2,12 @@
   <h1>
     Home Security
   </h1>
+
+  <span class="navbar-text">
+    <b>Hi, </b>{{this.user}}
+    <button (click)="disconnect()" type="button" class="btn btn-success">Disconnect</button>
+    <!--<mdb-icon fas icon=""></mdb-icon>--> 
+  </span>
 </nav>
 
 <div class="container glo" *ngIf="this.authentified">

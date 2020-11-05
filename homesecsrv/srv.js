@@ -15,6 +15,7 @@ var homeconfig = {"latitude":0, "longitude":0};
 var sensorStatus = {"connected":"TRUE", "state":"ON", "alerting":"FALSE"};
 var mobileconfig = {"connected":"FALSE", "latitude":43.627770, "longitude":7.048154};
 var isAuth = false;
+var user = "";
 
 
 httpServer.listen(1300, ()=>{
@@ -96,7 +97,7 @@ res.end(JSON.stringify(homeconfig));
 
 app.get("/getAuthStatus",(req,res)=>{
 console.log("Got request on /getAuthStatus");
-var qrs = {"isAuth":isAuth};
+var qrs = {"isAuth":isAuth, "user":user};
 res.end(JSON.stringify(qrs));
 });
 
@@ -110,7 +111,9 @@ res.end(JSON.stringify(isAuth));
 app.post("/login",(req,res)=>{
 console.log("Got post request on /login");
 isAuth = true;
-io.emit("auth",isAuth);
+user = req.body.user;
+var qrs = {"isAuth":isAuth, "user":user};
+io.emit("auth",qrs);
 res.end(JSON.stringify(isAuth));
 });
 
