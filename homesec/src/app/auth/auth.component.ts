@@ -9,18 +9,18 @@ import { AuthserService } from '../authser.service';
 })
 export class AuthComponent implements OnInit {
 
-  SignInForm;
+  LoginForm;
   SignUpForm;
   constructor(private autsrv : AuthserService, private formBuilder: FormBuilder) {
-    this.SignInForm = this.formBuilder.group({
-      username: '',
+    this.LoginForm = this.formBuilder.group({
+      email: '',
       password: ''
     });
     this.SignUpForm = this.formBuilder.group({
       username: '',
       email: '',
-      numero: '',
-      password: ''
+      password: '',
+      card:''
     });
     
    }
@@ -29,13 +29,28 @@ export class AuthComponent implements OnInit {
      
   }
   onSubmit(login){
-    this.SignInForm.reset();
-    console.log(JSON.stringify(login));
-   
-  
-    
+    this.LoginForm.reset();
+    console.log(JSON.stringify(login));    
+    this.auth()
   }
 
+  logIn(login){
+    this.LoginForm.reset();
+    console.log(JSON.stringify(login));    
+    this.autsrv.login(login).subscribe((data)=>{
+      if(!data.isAuth){
+        alert("Wrong credentials");
+      }
+    })
+  }
+
+  signUp(sign){
+    this.SignUpForm.reset();
+    console.log(JSON.stringify(sign));    
+    this.autsrv.signup(sign).subscribe((data)=>{
+      alert("User Created successfully, You can login into your account");
+    })
+  }
   auth(){
     let body = {};
     this.autsrv.login(body).subscribe((data)=>{

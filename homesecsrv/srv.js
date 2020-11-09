@@ -1,6 +1,7 @@
 const http = require('http')
 const express = require('express')
 const app = express();
+var mysql = require('mysql');
 
 var httpServer = http.createServer(app);
 
@@ -16,6 +17,16 @@ var sensorStatus = {"connected":"TRUE", "state":"ON", "alerting":"FALSE"};
 var mobileconfig = {"connected":"FALSE", "latitude":43.627770, "longitude":7.048154};
 var isAuth = false;
 var user = "";
+
+var connection = mysql.createConnection({
+  host     : '172.17.0.5',
+  port     : 3306,
+  user     : 'root',
+  password : 'Tkhabel_1234',
+  database : 'homesec_db'
+});
+connection.connect();
+
 
 
 httpServer.listen(1300, ()=>{
@@ -110,12 +121,67 @@ res.end(JSON.stringify(isAuth));
 
 app.post("/login",(req,res)=>{
 console.log("Got post request on /login");
-isAuth = true;
-user = req.body.user;
-var qrs = {"isAuth":isAuth, "user":user};
-io.emit("auth",qrs);
-res.end(JSON.stringify(isAuth));
+var allUsers = [];
+connection.query('SELECT * FROM user', function (error, results, fields) {
+  	if (error) {
+        	res.end(JSON.stringify(error));
+        	throw error;
+        	}
+  	console.log('The solution is: ', JSON.stringify(results));
+	allUsers = results;
+	
+	var found = false;
+	var email = req.body.email;
+	var password = req.body.password;
+
+	for(var i=0;i<allUsers.length;i++){
+		if((allUsers[i].email==email)&&(allUsers[i].password==password)){
+			found = true;
+			isAuth = true;
+			user = allUsers[i].username
+		}
+	}
+	if(isAuth){
+	var qrs = {"isAuth":isAuth, "user":user};
+	io.emit("auth",qrs);
+	res.end(JSON.stringify(qrs));
+	}
+	else{
+	var qrs = {"isAuth":isAuth, "user":"null"};	
+	res.end(JSON.stringify(qrs));
+		}
+	});
 });
+
+app.post("/insertUser",function(req,res){
+        var username = req.body.username;
+        var email = req.body.email;
+	var password = req.body.password;
+        var card = req.body.card;
+	var quer = "INSERT INTO \`user\` (\`username\`, \`email\`, \`password\`, \`card_id\`) VALUES (\'"+username+"\', \'"+email+"\', \'"+password+"\', \'"+card+"\')"
+	console.log("query ->"+quer);
+	connection.query(quer, function (error, results, fields) {
+ 	 if (error) {
+  	      res.end(JSON.stringify(error));
+   	     throw error;
+        }
+  	console.log('The solution is: ', JSON.stringify(results));
+  	res.end(JSON.stringify(results));
+	});
+});
+
+app.get("/getAllUsers",function(req,res){
+ 	connection.query('SELECT * FROM user', function (error, results, fields) {
+  	if (error) {
+        	res.end(JSON.stringify(error));
+        	throw error;
+        	}
+  	console.log('The solution is: ', JSON.stringify(results));
+  	res.end(JSON.stringify(results));
+	});
+});
+
+
 
 //Socket handler
 

@@ -13,6 +13,10 @@ export class AuthserService {
     return this.httpc.post("http://193.46.198.9:1300/login",body);
   }
 
+  signup(body) : Observable<any>{
+    return this.httpc.post("http://193.46.198.9:1300/insertUser",body);
+  }
+
   disconnect() : Observable<any>{
     return this.httpc.post("http://193.46.198.9:1300/disconnect",{});
   }

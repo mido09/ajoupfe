@@ -13,7 +13,7 @@ import { SocketsrvService } from './services/socketsrv.service';
 export class AppComponent implements OnInit {
   title = 'homesec'
   authentified = false;
-name  = "AYADI"
+  name  = ""
 
   constructor( private ss : ServerstateService, private soc : SocketsrvService, private autsrv : AuthserService) { }
 
@@ -30,7 +30,8 @@ name  = "AYADI"
 
   listenToServerMessages(){
     this.soc.onNewMessage("auth").subscribe((data)=>{
-      this.authentified = data;
+      this.authentified = data.isAuth;
+      this.name = data.user;
     });
   }
 
