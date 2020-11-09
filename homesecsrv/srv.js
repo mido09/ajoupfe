@@ -2,7 +2,6 @@ const http = require('http')
 const express = require('express')
 const app = express();
 var mysql = require('mysql');
-
 var httpServer = http.createServer(app);
 
 app.use(function(req,res,next){
@@ -10,6 +9,8 @@ app.use(function(req,res,next){
   res.header("Access-Control-Allow-Headers","Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
+
+app.use(express.json());
 const io = require('socket.io')(httpServer);
 
 var homeconfig = {"latitude":0, "longitude":0};

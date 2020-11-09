@@ -14,6 +14,7 @@ export class AuthserService {
   }
 
   signup(body) : Observable<any>{
+    console.log("Sending post with body "+body.username);
     return this.httpc.post("http://193.46.198.9:1300/insertUser",body);
   }
 
