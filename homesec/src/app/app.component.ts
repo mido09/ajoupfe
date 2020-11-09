@@ -23,6 +23,7 @@ export class AppComponent implements OnInit {
     this.listenToServerMessages();
     this.ss.getAuthStatus().subscribe((data)=>{
       this.authentified = JSON.parse(JSON.stringify(data)).isAuth;
+      this.name = JSON.parse(JSON.stringify(data)).user;
      
     });
   }
