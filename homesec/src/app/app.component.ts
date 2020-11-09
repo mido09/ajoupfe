@@ -1,4 +1,4 @@
-import { OnInit } from '@angular/core';
+import { Input, OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { AuthserService } from './authser.service';
 import { ServerstateService } from './services/serverstate.service';
@@ -9,21 +9,24 @@ import { SocketsrvService } from './services/socketsrv.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent implements OnInit {
   title = 'homesec'
   authentified = false;
-  user  = ""
+name  = "AYADI"
 
-  constructor(private ss : ServerstateService, private soc : SocketsrvService, private autsrv : AuthserService) { }
+  constructor( private ss : ServerstateService, private soc : SocketsrvService, private autsrv : AuthserService) { }
 
   ngOnInit(): void {
-
+   
     this.soc.connectSocket();
     this.listenToServerMessages();
     this.ss.getAuthStatus().subscribe((data)=>{
       this.authentified = JSON.parse(JSON.stringify(data)).isAuth;
+     
     });
   }
+  
 
   listenToServerMessages(){
     this.soc.onNewMessage("auth").subscribe((data)=>{
@@ -37,4 +40,5 @@ export class AppComponent implements OnInit {
       
     });
   }
+  
 }

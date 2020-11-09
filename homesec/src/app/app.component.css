@@ -1,3 +1,13 @@
+body {
+    background:violet;
+    font-variant:  small-caps ;
+}
 .glo{
     margin-top: 6%;
 }
+
+h1 {
+    color: gray;
+    text-shadow: slategray;
+    
+  }

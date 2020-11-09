@@ -9,16 +9,31 @@ import { AuthserService } from '../authser.service';
 })
 export class AuthComponent implements OnInit {
 
-  checkoutForm;
-
+  SignInForm;
+  SignUpForm;
   constructor(private autsrv : AuthserService, private formBuilder: FormBuilder) {
-    this.checkoutForm = this.formBuilder.group({
+    this.SignInForm = this.formBuilder.group({
       username: '',
       password: ''
     });
+    this.SignUpForm = this.formBuilder.group({
+      username: '',
+      email: '',
+      numero: '',
+      password: ''
+    });
+    
    }
-
+   
   ngOnInit(): void {
+     
+  }
+  onSubmit(login){
+    this.SignInForm.reset();
+    console.log(JSON.stringify(login));
+   
+  
+    
   }
 
   auth(){
